@@ -368,3 +368,88 @@ delete From Identity_testing
 where id is null
 
 
+--------------------------------------------- Day 9 -------------------------------------------
+select count(*)as count from Products
+
+select * from Products 
+where UnitPrice  Between 1 and 10
+
+--and | or 
+
+--
+
+select *  from Products
+--where UnitPrice in (select Min(UnitPrice) from Products)
+
+Update Products
+set UnitPrice = 2.50
+where ProductID = 1
+
+--Between
+--Min
+--Max
+--Count
+--Avg
+--Sum
+
+
+
+select Min(UnitPrice) from Products
+
+
+--------------------------------------------- Day 10 -------------------------------------------
+--store procedure : ready made query
+
+create Procedure getFilteredRecords @anyvalue int, @randomnumber int
+as
+select * from Products
+where UnitPrice Between @anyvalue and @randomnumber
+go
+
+exec getFilteredRecords 5, 10
+
+drop procedure getFilteredRecords
+
+
+
+--Views
+--insert into view
+
+create view Top10HighPrice as
+select top 10 * from Products
+order by UnitPrice desc;
+
+drop view Top10HighPrice		
+
+alter table products
+Add ReorderLevel int
+
+alter table products
+drop constraint DF_Products_ReorderLevel, CK_ReorderLevel
+
+
+exec sp_help Products
+
+
+select * from Top10HighPrice
+
+insert into Products values ('Thüringer Rostbratwurst' ,12,6,'50 bags x 30 sausgs.',	10000,	0,	0,	0,	1)
+
+
+exec sp_rename 'Top10HighPrice.Discontinued','updatedColumnName'
+
+--group by 
+
+select top 1 SupplierID,Count(*) as SupplierProducts from Products
+group by SupplierID
+order by SupplierProducts desc
+
+select * from Suppliers
+
+
+select count(*) from Products
+where SupplierID = 5
+
+
+
+
