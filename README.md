@@ -452,4 +452,23 @@ where SupplierID = 5
 
 
 
+--------------------------------------------- Day 12 -------------------------------------------
+select * from Orders --830
+
+select * from Employees
+select * from Shippers
+
+create view ordersTop10Record as
+select top 10 * from Orders
+
+
+select ord.OrderID,ord.OrderDate,ord.ShipCity,Shippers.*,
+CONCAT(Employees.LastName,' ',Employees.FirstName) as empFullName, Employees.Title
+from ordersTop10Record as Ord
+inner join Shippers
+on Ord.ShipVia = Shippers.ShipperID
+inner join Employees
+on Ord.EmployeeID = Employees.EmployeeID
+
+
 
