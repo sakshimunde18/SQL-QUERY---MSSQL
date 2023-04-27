@@ -469,6 +469,3 @@ inner join Shippers
 on Ord.ShipVia = Shippers.ShipperID
 inner join Employees
 on Ord.EmployeeID = Employees.EmployeeID
-
-
-
