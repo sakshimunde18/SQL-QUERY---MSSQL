@@ -358,15 +358,12 @@ set ID_updated = id
 
 exec sp_rename 'Identity_testing.ID_updated', 'id'
 
-
-
 insert into Identity_testing  values (20,'userName3')
 
 select * from Identity_testing
 
 delete From Identity_testing
 where id is null
-
 
 --------------------------------------------- Day 9 -------------------------------------------
 select count(*)as count from Products
@@ -392,10 +389,7 @@ where ProductID = 1
 --Avg
 --Sum
 
-
-
 select Min(UnitPrice) from Products
-
 
 --------------------------------------------- Day 10 -------------------------------------------
 --store procedure : ready made query
@@ -449,8 +443,6 @@ select * from Suppliers
 
 select count(*) from Products
 where SupplierID = 5
-
-
 
 --------------------------------------------- Day 12 -------------------------------------------
 select * from Orders --830
