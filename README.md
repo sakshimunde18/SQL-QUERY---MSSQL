@@ -169,8 +169,6 @@ exec sp_rename 'DemoTable', 'NewTableName'
 
 --The database could not be exclusively locked to perform the operation.
 
-
-
 -- primary : not null & unique
 
 create Table primaryKeyTable(
