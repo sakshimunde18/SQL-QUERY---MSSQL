@@ -1,5 +1,4 @@
 ------------------------------------------ Session 2 -------------------------------------------
-
 drop database Northwind
 
 -- how to create table
