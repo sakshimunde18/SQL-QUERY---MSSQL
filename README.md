@@ -1,23 +1,23 @@
---DATABASE--
+--DATABASE--<br>
 
--------------create database-------------
+-------------create database-------------<br>
 create database S1;
 
--------------use database-------------
+-------------use database-------------<br>
 use S1;
 
--------------rename database-------------
+-------------rename database-------------<br>
 alter database S1 modify name = S18
 
--------------delete database-------------
+-------------delete database-------------<br>
 drop database S18
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---TABLE
+--TABLE<br>
 
--------------create TABLE-------------
+-------------create TABLE-------------<br>
 create table prectice(
 id int,
 Fname varchar(225),
@@ -29,7 +29,7 @@ phonenumber bigint unique,
 );
 
 
--------------select table-------------
+-------------select table-------------<br>
 select * from prectice;
 select id,dob2 from prectice;
 
@@ -37,20 +37,20 @@ select * into newtest from prectice
 select * from newtest
 
 
--------------insert table-------------
-insert into prectice values (1,'rohit', '2001-09-04','12:12:12', '2001-09-04 12:12:12' ,100.10 , 9146585763);
-insert into prectice (id,Fname,phonenumber)values (2,'rafat',9146585764);
-insert into prectice (id,Fname,phonenumber)values (3,'rafat',9146585765);
+-------------insert table-------------<br>
+insert into prectice values (1,'sakshi', '2002-04-18','12:12:12', '2002-04-18 12:12:12' ,100.10 , 123456789);
+insert into prectice (id,Fname,phonenumber)values (2,'rafat',123456789);
+insert into prectice (id,Fname,phonenumber)values (3,'rohit',123456789);
 
 
--------------drop table-------------
+-------------drop table-------------<br>
 drop table prectice;
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
--------------Alter table-------------
+-------------Alter table-------------<br>
 alter table prectice 
 add Lname varchar(225);
 
@@ -60,51 +60,51 @@ alter column Lname varchar(50);
 alter table prectice 
 drop column Lname;
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---rename column name--
+--rename column name--<br>
 sp_rename 'prectice.Lname','LNAME','COLUMN';
 
---rename table name--
+--rename table name--<br>
 sp_rename 'practice','prectice'
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
--------------truncate table-------------
+-------------truncate table-------------<br>
 truncate table prectice;
 
 
 -------------------------------------------------------------------------------------------------------------------------
 
--------------UPDATE TABLE-------------
+-------------UPDATE TABLE-------------<br>
 update prectice 
-set LNAME = 'waghmare'
+set LNAME = 'munde'
 where id = 1;
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
--------------DELETE TABLE VALUES-------------
+-------------DELETE TABLE VALUES-------------<br>
 delete from  prectice
 where id = 3 and id = 4;
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
--------------TABLE CONSTRAINTS-------------
+-------------TABLE CONSTRAINTS-------------<br>
 --not null--
 alter table prectice
 alter column id int not null;
 
 
---unique--
+--unique--<br>
 alter table prectice 
 add age int unique;
 
 
 
---DEFAULT--
+--DEFAULT--<br>
 create table t3(
 id int,
 fname varchar(225) default 'rohit'
@@ -115,7 +115,7 @@ select * from t3
 
 
 
---primary key--
+--primary key--<br>
 create table t1(
 id int,
 fname varchar(225) not null
@@ -123,92 +123,92 @@ constraint pk primary key (id)
 );
 
 select * from t1;
-insert into t1 values (3,'rohit'),(4,'rafat')
+insert into t1 values (3,'sakshi'),(4,'rafat'),(5,'rohit')
 
 
 
---foreign key--
+--foreign key--<br>
 create table t2(
 id int,
 fname varchar(225) not null
 constraint fk foreign key (id) references t1(fname)
 );
 
-insert into t2 values (3,'rohit waghmare'),(4,'rafat naaz')
+insert into t2 values (3,'sakshi munde'),(4,'rohit waghmare'),(5,'rafat naaz')
 select * from t2
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---add constraint--
+--add constraint--<br>
 alter table prectice 
 add constraint unique_value unique(id);
 
 
---drop constraint--
+--drop constraint--<br>
 alter table prectice
 drop constraint unique_value; 
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---TABLE DESC--
+--TABLE DESC--<br>
 sp_help t2
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---SELECT IN TABLE--
+--SELECT IN TABLE--<br>
 use Northwind
 select * from Products
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---DISTINCT--
+--DISTINCT--<br>
 select distinct Country from Customers
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---COUNT--
+--COUNT--<br>
 select count(*) as countt from Customers
 
 select count(country) from Customers
 select count(distinct country) from Customers
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---SUM--
+--SUM--<br>
 select sum(CategorySales) as summ from [Category Sales for 1997]
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---AVG--
+--AVG--<br>
 select avg(UnitsInStock) from Products
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---MIN--
+--MIN--<br>
 select min(UnitsInStock) from Products
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---MAX--
+--MAX--<br>
 select max(UnitsInStock) from Products
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---BETWEEN--
+--BETWEEN--<br>
 select * from Products
 where UnitPrice between 1 and 10;
 
@@ -216,10 +216,10 @@ select * from Products
 where UnitPrice not between 1 and 10;
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---GROUP BY--
+--GROUP BY--<br>
 select Country,count(Country) as countt from Customers 
 group by Country
 
@@ -227,9 +227,9 @@ select Discontinued from Products
 group by Discontinued
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---ORDER BY--
+--ORDER BY--<br>
 select Country,count(Country) as countt from Customers 
 group by Country order by count(Country) asc;
 
@@ -238,17 +238,17 @@ order by PostalCode desc
 
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---top--
+--top--<br>
 select top 10 * from Customers
 
 select top 93 percent * from Customers
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---LIKE--
+--LIKE--<br>
 select * from Customers
 where (Country like 'a%' or Country like 'e%' or Country like 'i%' or Country like 'o%' or Country like 'u%') 
 AND   (Country like '%a' or Country like '%e' or Country like '%i' or Country like '%o' or Country like '%u')
@@ -261,17 +261,17 @@ select * from Customers
 where Country like '[a-g]%a'
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---IN--
+--IN--<br>
 select * from Customers
 where Country in ('argentina','usa','germany')
 order by country
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---IDENTITY--
+--IDENTITY--<br>
 create table t4(
 id int identity (1,1),
 fname varchar(225)
@@ -281,9 +281,9 @@ insert into t4 (fname) values ('rohit'),('rafat')
 select * from t4
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---SUB QUERY--
+--SUB QUERY--<br>
 
 select Country into newcountry from Customers
 where Country in ('usa','argentina')
@@ -292,9 +292,9 @@ select * from Customers
 where Country in (select * from newcountry)
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
---PROCEDURES--
+--PROCEDURES--<br>
 
 create procedure getcountryUsaAndArgentina
 as
@@ -309,7 +309,7 @@ exec getcountryUsaAndArgentina
 drop procedure getcountryUsaAndArgentina
 
 
---DYNAMIC PROCEDURE--
+--DYNAMIC PROCEDURE--<br>
 
 create procedure getcountryUsaAndArgentina2 @value1 varchar(225), @value2 varchar(225)
 as
@@ -322,10 +322,10 @@ exec getcountryUsaAndArgentina2 @value1 = 'USA',@value2 = 'argentina'
 drop procedure getcountryUsaAndArgentina2
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---VIEW--
+--VIEW--<br>
 create view prod
 as
 select * from Products
@@ -335,12 +335,12 @@ select * from prod
 insert into prod values('Aniseed Syrupp',1,2,'122 - 550 ml bottles',3.00,	13,	70,	25,	0)
 
 
--------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------<br>
 
 
---JIONS--
+--JIONS--<br>
 
---inner join--
+--inner join--<br>
 select * from Orders
 select * from Customers
 
@@ -374,52 +374,52 @@ set fname = concat('name-',right_id)
 
 
 update Rt 
-set fname = 'Rohit'
+set fname = 'sakshi'
 where fname in (select top 1 fname from RT)
 
 
 
---left--
+--left--<br>
 select * from lt
 left join Rt 
 on lt.left_id = Rt.right_id
 
 
 
---Right--
+--Right--<br>
 select * from Rt
 right join lt 
 on lt.left_id = Rt.right_id
 
 
 
---full OUTER JOIN--
+--full OUTER JOIN--<br>
 select * from lt
 full outer join Rt 
 on lt.left_id = Rt.right_id
 
 
---union------DISTINT values
+--union------DISTINT values <br>
 select * from lt
 union
 select * from Rt
 
---union all--ALL values
+--union all--ALL values<br>
 select * from lt
 union all
 select * from Rt
 
 
---3 TABLE JOIN--
+--3 TABLE JOIN--<br>
 create table newtable(
 t3_id int,
 fname varchar(225)
 )
 
 select * from newtable
-insert into newtable values(1,'rohit'),(2,'rafat'),(3,'pogo')
+insert into newtable values(1,'sakshi'),(2,'rohit'),(3,'rafat')
 
---1--
+--1--<br>
 select * from lt 
 inner join Rt
 on lt.left_id = Rt.right_id
@@ -427,7 +427,7 @@ inner join newtable
 on lt.left_id = newtable.t3_id
 
 
---2--
+--2--<br>
 select * from lt
 left join Rt
 on lt.left_id = Rt.right_id
@@ -435,7 +435,7 @@ left join newtable
 on lt.left_id = newtable.t3_id
 
 
---3--
+--3--<br>
 select * from lt
 right join Rt
 on lt.left_id = Rt.right_id
@@ -444,7 +444,7 @@ on lt.left_id = newtable.t3_id
 
 
 
---TRIGGERS--
+--TRIGGERS--<br>
 
 create trigger tig
 on ARCustomers
@@ -456,22 +456,22 @@ update ARCustomers
 set Country = 'United Arab Emir'
 where CustomerID = 13006
 
---VIEW--
+--VIEW--<br>
 create view v1
 as
 select top 10 * from ARCustomers
 
 select * from v1
 
---BETWEEN--
+--BETWEEN--<br>
 select * from ARCustomers
 where CustomerID between  13000 and 15000
 
---LIKE--
+--LIKE--<br>
 select * from ARCustomers
 where City like 'a%'
 
---group BY--
+--group BY--<br>
 select City,count(City) from ARCustomers
 group by City
 
