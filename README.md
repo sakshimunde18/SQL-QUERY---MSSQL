@@ -1,460 +1,479 @@
------------------------------------------- Session 2 -------------------------------------------<br>
-drop database Northwind
+--DATABASE--
 
--- how to create table
+-------------create database-------------
+create database S1;
 
-create table TestTable(
-	ID int,
-	UserName varchar(255),
-	Address varchar(255),saasasa
-	phoneNumber int,
-	email varchar(100)
-)
+-------------use database-------------
+use S1;
 
-drop table TestTable
--- no change to any value
--- no casesensitive
--- DQL : select
--- * meaning all columns 
-alter table TestTable
-alter column Address varchar(15);
+-------------rename database-------------
+alter database S1 modify name = S18
 
--- for adding new column after table creation
-alter table Testtable
-Add Email varchar(100)
-
---How to insert data from existing table
-select * into newTable from TestTable
-select Id, Username into newTable2 from TestTable
-
--- how to truncate table
-select *  from TestTable;
-truncate table TestTable
-
-select * from newTable2
--- how to insert data in table
-insert into TestTable values(1,'dumyUsername','address',12);
-insert into TestTable (UserName,address) values ('user2','address');
-
-create table TestTable(
-	ID int,
-	UserName varchar(255),
-	Address varchar(255),
-	phoneNumber int,
-	email varchar(100)
-)
-insert into testTable values (2,'username','address',20200,'@gmail.com')
-select * from TestTable
-drop table TestTable
-
-truncate table testTable 
-
-delete from testTable
-
-where id = 2
-
-------------------------------------------- Session 3 -------------------------------------------
+-------------delete database-------------
+drop database S18
 
 
--- 1 to 500
--- string : ''
--- constraints : for validation purpose
-create table TableName(
-	id int  not null,
-	name varchar(8000) not null,
-	Constraint Unique_value unique (name,id)
-)
+-------------------------------------------------------------------------------------------------------------------------
 
---primary key : unique + not null | only one column in table
+--TABLE
 
-drop table TableName;
-
---how to add unique constraint to table
-alter table TableName
-Add Constraint Unique_value unique (name);
-
-alter table TableName 
-drop Constraint Unique_value
-
-delete from TableName
-where id = 1  and name = 'testname2'
-
-insert into TableName values (3,'testname2')
-select * from TableName
-
---create database
-create database DatabaseName;
-
---to delete database
-drop database DatabaseName;
-
---to modify database name
-alter Database Northwind Modify name = SQLpractiseDatabase;
-alter Database updated modify name = newDataname;
-
-EXEC sp_renamedb 'Northwind' , 'UpdatedDataBase'  
-EXEC sp_renamedb 'SQLpractiseDatabase' , 'updated'
-
---to select a database
-use master
-
---create table
---insert
---alter table : add column, column datatype change
---how to update cell value
+-------------create TABLE-------------
+create table prectice(
+id int,
+Fname varchar(225),
+dob date,
+dob1 time,
+dob2 datetime,
+percentt float,
+phonenumber bigint unique,
+);
 
 
-select * from Customers
+-------------select table-------------
+select * from prectice;
+select id,dob2 from prectice;
 
---alter & update
-
-
--- for adding new column
-alter table Customers
-add Newcloumn varchar(500)
-
--- for changing column datatype
-alter table Customers
-alter column Newcloumn int
-
---truncate
---delete
-
-drop table Customers
-
-select * from Customers
---alter : column level
---update: row level
-
-update Customers
-Set CompanyName = 'newCompany Name'
-where CustomerID = 'ALFKI'
-
---Constraints : limit 
-
-     ------------------------------------------- Session  4 -------------------------------------------
+select * into newtest from prectice
+select * from newtest
 
 
---not null
---unique drop
-
-create table DemoTable(
-	Id int not null unique
-)
-
-select * from DemoTable
-insert into DemoTable values (5),(6);
-
-exec sp_help DemoTable
+-------------insert table-------------
+insert into prectice values (1,'rohit', '2001-09-04','12:12:12', '2001-09-04 12:12:12' ,100.10 , 9146585763);
+insert into prectice (id,Fname,phonenumber)values (2,'rafat',9146585764);
+insert into prectice (id,Fname,phonenumber)values (3,'rafat',9146585765);
 
 
-alter table DemoTable
-alter column Id int null
-
-alter table Demotable
-drop constraint UQ__DemoTabl__3214EC06307FDA30
+-------------drop table-------------
+drop table prectice;
 
 
---rename database
-exec sp_renamedb 'SQL_Lectures' , 'Updated_SQL_lectures'
+-------------------------------------------------------------------------------------------------------------------------
 
 
+-------------Alter table-------------
+alter table prectice 
+add Lname varchar(225);
+
+alter table prectice
+alter column Lname varchar(50); 
+
+alter table prectice 
+drop column Lname;
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--rename column name--
+sp_rename 'prectice.Lname','LNAME','COLUMN';
+
+--rename table name--
+sp_rename 'practice','prectice'
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------truncate table-------------
+truncate table prectice;
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------UPDATE TABLE-------------
+update prectice 
+set LNAME = 'waghmare'
+where id = 1;
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------DELETE TABLE VALUES-------------
+delete from  prectice
+where id = 3 and id = 4;
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------TABLE CONSTRAINTS-------------
+--not null--
+alter table prectice
+alter column id int not null;
+
+
+--unique--
+alter table prectice 
+add age int unique;
+
+
+
+--DEFAULT--
+create table t3(
+id int,
+fname varchar(225) default 'rohit'
+);
+
+insert into t3 (id) values(2)
+select * from t3
+
+
+
+--primary key--
+create table t1(
+id int,
+fname varchar(225) not null
+constraint pk primary key (id)
+);
+
+select * from t1;
+insert into t1 values (3,'rohit'),(4,'rafat')
+
+
+
+--foreign key--
+create table t2(
+id int,
+fname varchar(225) not null
+constraint fk foreign key (id) references t1(fname)
+);
+
+insert into t2 values (3,'rohit waghmare'),(4,'rafat naaz')
+select * from t2
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--add constraint--
+alter table prectice 
+add constraint unique_value unique(id);
+
+
+--drop constraint--
+alter table prectice
+drop constraint unique_value; 
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--TABLE DESC--
+sp_help t2
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--SELECT IN TABLE--
 use Northwind
-
--- to change table name using query
-exec sp_rename 'DemoTable', 'NewTableName'
-
-
-
---The database could not be exclusively locked to perform the operation.
-
--- primary : not null & unique
-
-create Table primaryKeyTable(
-	ID int,
-	name varchar(255),
-	Age int,
-	Constraint primary_key primary key (id)
-)
-
-alter table primarykeyTable
-Add constraint primary_key primary key(id)
-
-alter table primarykeyTable
-drop constraint primary_key
-
-
-create table foreignkeyTable(
-	foreignkeyID int,
-	Address varchar(255),
-	Email varchar(200),
-	--Constraint fk_key foreign key (foreignkeyID) references primarykeytable(Id)
-)
-
-alter table foreignkeyTable
-add  Constraint fk_key foreign key (foreignkeyID) references primarykeytable(Id)
-
-alter table foreignkeyTable
-drop constraint fk_key
-
-
-drop table foreignkeyTable
-
-select * from primaryKeyTable
-select * from foreignkeyTable
-
-insert into foreignkeyTable (foreignkeyID) values (4);
-
-
--- during table creation
--- Alter table
-
-alter table primaryKeyTable
-Add constraint primary_key primary key(id,name)
-
-alter table primarykeyTable
-drop constraint primary_key
-
-select * from primaryKeyTable
-insert into primaryKeyTable values (4,'name1',10)
-
-delete from primaryKeyTable
-where id = 4
-
-
-use Northwind
-
---primary key & foreign key : relationship between two tables
-
-select * from updatedCategories
-select * from Suppliers
-select * from products
-where CategoryID = 4
-
-alter table updatedCategories
-drop constraint PK_Categories
-
-truncate table ForeignkeyTable
-
-
-       ------------------------------------------- Session  5 -------------------------------------------
-
-
-
-create table Foreignkey_table(
-	Connected_Id int,
-
---1st way
-constraint fk_connectid_id foreign key (Connected_ID) references Primarykey_table(ID)
-)
-
-select * from Foreignkey_table
-
-insert into Foreignkey_table values (6),(1);
-
---2nd way
---alter table Foreignkey_table
---add constraint fk_connectid_id foreign key (Connected_ID) references Primarykey_table(ID)
-
-
-
-
-
-
--- foregin key : A relation between two table where froeign key table can only take value than are defind in primary table column.
-
-
-create table Primarykey_table(
--- 1st way	
-	ID int primary key,
--- 2nd way	
---	constraint pk_id primary key(ID)
-)
-
-select * from Primarykey_table
-
-insert into Primarykey_table values (1),(2),(3),(4),(5);
-
---3rd way
---alter table primarykey_table
---add constraint pk_id primary key(ID)
-
-
-
--- copy
-select Country into UserProvidedCountry from Customers
-where Country like 'U%' or Country like 'G%' or Country like 'A%' ;
-
-drop table UserProvidedCountry
-
-select * from UserProvidedCountry
-
-
---3country , 100,200 
---user
---germary, france, berlin
-select Country from Customers
-where Country = 'Germany' or Country = 'France' or Country = 'Brazil' or Country = 'India'
-
-
--- sql tuples
-select Country from Customers
---sub query
-where Country in (select * from userProvidedCountry);
-
-
--- % : it can be any thing.
-select country from Customers
-where Country like 'B%'
-
-use northwind
-
--- helps us to find only the unique records
-select Distinct Country from Customers
-
-
-       ------------------------------------------- Session  8 -------------------------------------------
-				   
-				   
-create Table Default_testing(
-	id int,
-	age int,
-	--first way
-	address varchar(500) Default 'No address input',
-	--2nd way
-	constraint DF_address Default 'Value Updated' for address
-)
-
-exec sp_help Default_testing
-
-alter table Default_testing
-drop constraint DF__Default_t__addre__3D5E1FD2
-
---3rd way
-alter table Default_testing
-add constraint DF_address Default 'Value Updated' for address
-
-select * from Default_testing
-
-insert into Default_testing (id, age) values (1,10)
-
-******************** Identity
-
-select * from Identity_testing
-
-insert into Identity_testing  values (20,'userName3')
-
-alter table Identity_testing
-add ID_updated int
-
-update Identity_testing
-
-alter table Identity_testing
-drop column id
-set ID_updated = id
-
-exec sp_rename 'Identity_testing.ID_updated', 'id'
-
-insert into Identity_testing  values (20,'userName3')
-
-select * from Identity_testing
-
-delete From Identity_testing
-where id is null
-
-         ------------------------------------------- Day 9 -------------------------------------------
-select count(*)as count from Products
-
-select * from Products 
-where UnitPrice  Between 1 and 10
-
---and | or 
-
---
-
-select *  from Products
---where UnitPrice in (select Min(UnitPrice) from Products)
-
-Update Products
-set UnitPrice = 2.50
-where ProductID = 1
-
---Between
---Min
---Max
---Count
---Avg
---Sum
-
-select Min(UnitPrice) from Products
-
-           ------------------------------------------- Day 10 -------------------------------------------
---store procedure : ready made query
-
-create Procedure getFilteredRecords @anyvalue int, @randomnumber int
-as
 select * from Products
-where UnitPrice Between @anyvalue and @randomnumber
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--DISTINCT--
+select distinct Country from Customers
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--COUNT--
+select count(*) as countt from Customers
+
+select count(country) from Customers
+select count(distinct country) from Customers
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--SUM--
+select sum(CategorySales) as summ from [Category Sales for 1997]
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--AVG--
+select avg(UnitsInStock) from Products
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--MIN--
+select min(UnitsInStock) from Products
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--MAX--
+select max(UnitsInStock) from Products
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--BETWEEN--
+select * from Products
+where UnitPrice between 1 and 10;
+
+select * from Products
+where UnitPrice not between 1 and 10;
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--GROUP BY--
+select Country,count(Country) as countt from Customers 
+group by Country
+
+select Discontinued from Products
+group by Discontinued
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--ORDER BY--
+select Country,count(Country) as countt from Customers 
+group by Country order by count(Country) asc;
+
+select PostalCode from Customers
+order by PostalCode desc
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--top--
+select top 10 * from Customers
+
+select top 93 percent * from Customers
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--LIKE--
+select * from Customers
+where (Country like 'a%' or Country like 'e%' or Country like 'i%' or Country like 'o%' or Country like 'u%') 
+AND   (Country like '%a' or Country like '%e' or Country like '%i' or Country like '%o' or Country like '%u')
+order by Country
+
+select * from Customers
+where Country like '_s%'
+
+select * from Customers
+where Country like '[a-g]%a'
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--IN--
+select * from Customers
+where Country in ('argentina','usa','germany')
+order by country
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--IDENTITY--
+create table t4(
+id int identity (1,1),
+fname varchar(225)
+);
+
+insert into t4 (fname) values ('rohit'),('rafat')
+select * from t4
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--SUB QUERY--
+
+select Country into newcountry from Customers
+where Country in ('usa','argentina')
+
+select * from Customers
+where Country in (select * from newcountry)
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+--PROCEDURES--
+
+create procedure getcountryUsaAndArgentina
+as
+select * from Customers
+where Country in ('usa','argentina')
 go
 
-exec getFilteredRecords 5, 10
 
-drop procedure getFilteredRecords
-
+exec getcountryUsaAndArgentina
 
 
---Views
---insert into view
-
-create view Top10HighPrice as
-select top 10 * from Products
-order by UnitPrice desc;
-
-drop view Top10HighPrice		
-
-alter table products
-Add ReorderLevel int
-
-alter table products
-drop constraint DF_Products_ReorderLevel, CK_ReorderLevel
+drop procedure getcountryUsaAndArgentina
 
 
-exec sp_help Products
+--DYNAMIC PROCEDURE--
+
+create procedure getcountryUsaAndArgentina2 @value1 varchar(225), @value2 varchar(225)
+as
+select * from Customers
+where Country = @value1 or Country = @value2
+go
+
+exec getcountryUsaAndArgentina2 @value1 = 'USA',@value2 = 'argentina' 
+
+drop procedure getcountryUsaAndArgentina2
 
 
-select * from Top10HighPrice
-
-insert into Products values ('Thüringer Rostbratwurst' ,12,6,'50 bags x 30 sausgs.',	10000,	0,	0,	0,	1)
+-------------------------------------------------------------------------------------------------------------------------
 
 
-exec sp_rename 'Top10HighPrice.Discontinued','updatedColumnName'
+--VIEW--
+create view prod
+as
+select * from Products
+where UnitPrice between 0 and 10
 
---group by 
-
-select top 1 SupplierID,Count(*) as SupplierProducts from Products
-group by SupplierID
-order by SupplierProducts desc
-
-select * from Suppliers
-
-
-select count(*) from Products
-where SupplierID = 5
-
-                   ------------------------------------------- Day 12 -------------------------------------------
-select * from Orders --830
-
-select * from Employees
-select * from Shippers
-
-create view ordersTop10Record as
-select top 10 * from Orders
+select * from prod
+insert into prod values('Aniseed Syrupp',1,2,'122 - 550 ml bottles',3.00,	13,	70,	25,	0)
 
 
-select ord.OrderID,ord.OrderDate,ord.ShipCity,Shippers.*,
-CONCAT(Employees.LastName,' ',Employees.FirstName) as empFullName, Employees.Title
-from ordersTop10Record as Ord
-inner join Shippers
-on Ord.ShipVia = Shippers.ShipperID
-inner join Employees
-on Ord.EmployeeID = Employees.EmployeeID
+-------------------------------------------------------------------------------------------------------------------------
+
+
+--JIONS--
+
+--inner join--
+select * from Orders
+select * from Customers
+
+select * from Customers
+inner join Orders
+on Customers.CustomerID = Orders.CustomerID
+
+create table lt(
+id int 
+);
+
+create table Rt(
+id int 
+);
+
+insert into lt values(1),(2),(3),(4)
+insert into Rt values(1),(5),(6)
+
+select * from lt 
+inner join Rt
+on lt.left_id = Rt.right_id
+
+sp_rename 'lt.id','left_id','COLUMN'
+sp_rename 'Rt.id','right_id','COLUMN'
+
+alter table lt
+add mid int identity(1,1)
+
+update Rt
+set fname = concat('name-',right_id)
+
+
+update Rt 
+set fname = 'Rohit'
+where fname in (select top 1 fname from RT)
+
+
+
+--left--
+select * from lt
+left join Rt 
+on lt.left_id = Rt.right_id
+
+
+
+--Right--
+select * from Rt
+right join lt 
+on lt.left_id = Rt.right_id
+
+
+
+--full OUTER JOIN--
+select * from lt
+full outer join Rt 
+on lt.left_id = Rt.right_id
+
+
+--union------DISTINT values
+select * from lt
+union
+select * from Rt
+
+--union all--ALL values
+select * from lt
+union all
+select * from Rt
+
+
+--3 TABLE JOIN--
+create table newtable(
+t3_id int,
+fname varchar(225)
+)
+
+select * from newtable
+insert into newtable values(1,'rohit'),(2,'rafat'),(3,'pogo')
+
+--1--
+select * from lt 
+inner join Rt
+on lt.left_id = Rt.right_id
+inner join newtable
+on lt.left_id = newtable.t3_id
+
+
+--2--
+select * from lt
+left join Rt
+on lt.left_id = Rt.right_id
+left join newtable
+on lt.left_id = newtable.t3_id
+
+
+--3--
+select * from lt
+right join Rt
+on lt.left_id = Rt.right_id
+right join newtable
+on lt.left_id = newtable.t3_id
+
+
+
+--TRIGGERS--
+
+create trigger tig
+on ARCustomers
+after insert,delete,update
+as
+select * from ARCustomers
+
+update ARCustomers
+set Country = 'United Arab Emir'
+where CustomerID = 13006
+
+--VIEW--
+create view v1
+as
+select top 10 * from ARCustomers
+
+select * from v1
+
+--BETWEEN--
+select * from ARCustomers
+where CustomerID between  13000 and 15000
+
+--LIKE--
+select * from ARCustomers
+where City like 'a%'
+
+--group BY--
+select City,count(City) from ARCustomers
+group by City
+
+
+
